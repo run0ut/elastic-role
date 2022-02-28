@@ -1,0 +1,28 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: true
+  tasks:
+
+    # - name: get elastic
+    #   include_role:
+    #     name: "elastic-role"
+
+    # FAILED! => {"msg": "An unhandled exception occurred while running the lookup plugin 'url'. Error was a <class 'ansible.errors.AnsibleError'>, 
+    #             original message: Received HTTP error for http://172.17.0.2:9200 : HTTP Error 503: Service Unavailable"}
+    # - name: test 
+    #   debug:
+    #     msg="{{ lookup('url', 'http://172.17.0.2:9200', split_lines=False) }}"
+
+    # но если нет эластика, кибана возвращает 503
+    # надо настроить эластик, чтобы кибана с ним интегрировалась и возвращала 200,
+    # тогда в статус кодах можно убрать 503
+    - name: test elastic web
+      uri:
+        url: "http://{{ ansible_nodename }}:9200"
+        status_code: 
+          - 200
+          # - 503
+        return_content: yes
+      failed_when: '"Elasticsearch server is not ready yet" in this.content'
+    
