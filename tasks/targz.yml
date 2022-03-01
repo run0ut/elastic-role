@@ -47,9 +47,12 @@
     - name: Configure Elasticsearch
       become: true
       template:
-        src: elasticsearch.yml.j2
-        dest: "{{ elasticsearch_home }}/config//elasticsearch.yml"
+        src: "{{ item }}.j2"
+        dest: "{{ elasticsearch_home }}/config/{{ item }}.yml"
         mode: 0644
+      loop:
+        - elasticsearch.yml
+        - jvm.options
 
     - name: Set environment Elasticsearch
       become: true
