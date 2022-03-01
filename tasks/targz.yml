@@ -47,12 +47,13 @@
     - name: Configure Elasticsearch
       become: true
       template:
-        src: "{{ item }}.j2"
-        dest: "{{ elasticsearch_home }}/config/{{ item }}.yml"
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
         mode: 0644
       loop:
-        - elasticsearch.yml
-        - jvm.options
+        - { src: "elasticsearch.yml.j2" , dest: "{{ elasticsearch_home }}/config/elasticsearch.yml" }
+        - { src: "jvm.options.j2" , dest: "{{ elasticsearch_home }}/config/jvm.options" }
+
 
     - name: Set environment Elasticsearch
       become: true
@@ -96,4 +97,3 @@
     cmd: docker exec -u elasticsearch -d -it {{ ansible_nodename }} bash /etc/profile.d/elasticsearch.sh
   changed_when: false
   delegate_to: 127.0.0.1
-
