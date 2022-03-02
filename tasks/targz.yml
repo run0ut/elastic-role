@@ -24,6 +24,7 @@
         timeout: 60
         force: true
         validate_certs: false
+        checksum: md5:b00c00932e4d75f72f8a9dc007faae26
       changed_when: false
       register: get_elasticsearch
       until: get_elasticsearch is succeeded
