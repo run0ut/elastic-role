@@ -16,7 +16,7 @@
 
 Поправить ``utsns`` с ``host`` на ``private``. 
 
-Пример `containers.conf` с изменениями из контейнера, собранного с `этим файлом <github.com/netology-code/mnt-homeworks/blob/MNT-7/08-ansible-05-testing/Dockerfile>'
+Пример `containers.conf` с изменениями из контейнера, собранного с `этим файлом <https://github.com/netology-code/mnt-homeworks/blob/MNT-7/08-ansible-05-testing/Dockerfile>`_
 
 .. code-block:: toml
 
